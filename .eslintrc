@@ -1,0 +1,13 @@
+{
+  "rules": {
+    "no-var": "error",
+    "prefer-const": "warn",
+    "no-unused-vars": "warn",
+    "no-undef": "warn",
+    "no-const-assign": "error",
+    "no-this-before-super": "error",
+    "no-undef-init": "error",
+    "no-duplicate-imports": "warn",
+    "no-useless-constructor": "warn"
+  }
+}

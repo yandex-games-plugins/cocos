@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "rootDirs": ["./assets"],
+    "module": "CommonJS",
+    "target": "ES2017",
+    "lib": [
+      "DOM",
+      "ES5",
+      "ES6",
+      "ES7",
+      "ES2015",
+      "ES2016",
+      "ES2017",
+      "ES2018",
+      "ES2019",
+      "ES2020",
+      "ES2021",
+      "ESNext"
+    ],
+    "strict": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "strictBindCallApply": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "skipLibCheck": true,
+    "emitDeclarationOnly": true,
+    "noEmit": true,
+    "types": [
+      "../@cc/cc.d.ts",
+      "../@cc/cc.env.d.ts",
+      "../@cc/cc.custom-macro.d.ts",
+      "../@cc/jsb.d.ts"
+    ]
+  },
+  "include": ["../@types/**/*.d.ts", "./assets/**/*.ts"]
+}

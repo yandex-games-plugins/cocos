@@ -1,0 +1,96 @@
+{
+  "package_version": 2,
+  "version": "1.0.0",
+  "name": "yandex-games-sdk",
+  "private": true,
+  "description": "i18n:yandex-games-sdk.description",
+  "main": "./dist/electron-main/src/main.js",
+  "author": "LisGames",
+  "editor": ">=3.6.0",
+  "license": "MIT",
+  "workspaces": [
+    "electron-main",
+    "static"
+  ],
+  "scripts": {
+    "build": "yarn workspace electron-main run build",
+    "dev": "yarn workspace electron-main run dev"
+  },
+  "panels": {
+    "localization-editor": {
+      "title": "Localization Editor",
+      "type": "dockable",
+      "main": "dist/electron-main/src/panels/localization-editor",
+      "size": {
+        "min-width": 400,
+        "min-height": 300,
+        "width": 1024,
+        "height": 600
+      }
+    }
+  },
+  "contributions": {
+    "builder": "dist/electron-main/src/builder/index.js",
+    "server": "dist/electron-main/src/server.js",
+    "scene": {
+      "script": "dist/electron-main/src/scene/index.js"
+    },
+    "menu": [
+      {
+        "path": "i18n:yandex-games-sdk.yandex-games-sdk",
+        "label": "i18n:yandex-games-sdk.localization-editor",
+        "message": "open-localization-editor"
+      },
+      {
+        "path": "i18n:yandex-games-sdk.yandex-games-sdk",
+        "label": "i18n:yandex-games-sdk.generate-templates",
+        "message": "generate-templates"
+      },
+      {
+        "path": "i18n:yandex-games-sdk.yandex-games-sdk",
+        "label": "i18n:yandex-games-sdk.check-templates",
+        "message": "check-templates"
+      }
+    ],
+    "messages": {
+      "open-localization-editor": {
+        "methods": [
+          "openLocalizationEditor"
+        ]
+      },
+      "generate-templates": {
+        "methods": [
+          "generateTemplates"
+        ]
+      },
+      "check-templates": {
+        "methods": [
+          "checkTemplates"
+        ]
+      },
+      "get-l10n-bundle": {
+        "methods": [
+          "getL10NBundle"
+        ]
+      },
+      "yandex-games-sdk:localization-reload": {
+        "public": true,
+        "description": "Localizations reload message"
+      }
+    },
+    "asset-db": {
+      "mount": {
+        "path": "./static/assets",
+        "readonly": true,
+        "visible": true
+      }
+    }
+  },
+  "devDependencies": {
+    "generate-license-file-webpack-plugin": "^1.0.1",
+    "node-loader": "^2.0.0"
+  },
+  "dependencies": {
+    "yarn": "^1.22.19"
+  }
+}

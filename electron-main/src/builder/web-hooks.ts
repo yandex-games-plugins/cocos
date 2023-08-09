@@ -15,15 +15,13 @@ export const onBeforeBuildAssets: BuildHook.onBeforeBuild = async function (
   result
 ) {
   const buildTask = (result as any).__task;
-  const internalResult = buildTask.result;
-  const i18nBundle = internalResult.bundleMap[L10N_BUNDLE.NAME];
 
   const translationsAssetUUID = "af6fd40f-7956-40de-997a-1f6a873ff430";
-  const translationsAsset = (await i18nBundle.cache.getInstance(
+  const translationsAsset = (await buildTask.cache.getInstance(
     translationsAssetUUID
   )) as JsonAsset;
   translationsAsset.json = await ipc.main.request("get-l10n-bundle");
-  i18nBundle.cache.addInstance(translationsAsset);
+  buildTask.cache.addInstance(translationsAsset);
 
   /**
    * Code below adds all translations json files to bundle.

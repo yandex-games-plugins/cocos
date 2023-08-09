@@ -8,7 +8,7 @@
 
 ### Installing the plugin
 
-After downloading the plugin, open your project in Cocos Creator or create a new one. In the upper panel, hover over *Extension* and select *Extension Manager*.
+After [downloading the plugin](bin/cc-ysdk-plugin.zip), open your project in Cocos Creator or create a new one. In the upper panel, hover over *Extension* and select *Extension Manager*.
 
 ![Untitled](docs/Getting%20Started/1.png)
 

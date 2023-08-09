@@ -47,7 +47,7 @@ export default defineComponent({
             <ui-label>New</ui-label>
           </ui-button>
 
-          {appState.editor.currentL10n && (
+          {appState.editor.currentTranslation && (
             <>
               <ui-button
                 class="header__button"
@@ -66,7 +66,7 @@ export default defineComponent({
             </>
           )}
 
-          {appState.editor.currentL10n && (
+          {appState.editor.currentTranslation && (
             <>
               <ui-button
                 class="header__button"
@@ -94,7 +94,7 @@ export default defineComponent({
         </header>
         <div class="content">
           <div class="l10nsMenu">
-            {appState.l10nsData
+            {appState.translations
               .sort((a, b) => {
                 if (a.code == "en") return -1;
                 if (b.code == "en") return 1;
@@ -103,15 +103,15 @@ export default defineComponent({
               .map((data) => (
                 <div
                   class={
-                    appState.editor.currentL10n == data
+                    appState.editor.currentTranslation === data
                       ? "l10nsMenu__item l10nsMenu__item--active"
                       : "l10nsMenu__item"
                   }
-                  onClick={() =>
-                    appState.editor.currentL10n === data
-                      ? (appState.editor.currentL10n = undefined)
-                      : (appState.editor.currentL10n = data)
-                  }
+                  onClick={() => {
+                    if (appState.editor.currentTranslation !== data) {
+                      appState.editor.currentTranslation = data;
+                    }
+                  }}
                 >
                   <div class="l10nsMenu__code">{data.code}</div>
                   {data.progress && (
@@ -167,7 +167,7 @@ chokidar.watch(translateDataRoot).on("all", (event, path) => {
 
   switch (event) {
     case "add":
-      appState.l10nsData.push({ code, path });
+      appState.translations.push({ code, path });
       break;
     case "change":
       window.dispatchEvent(
@@ -177,7 +177,12 @@ chokidar.watch(translateDataRoot).on("all", (event, path) => {
       ipc.main.broadcast("yandex-games-sdk:localization-reload");
       break;
     case "unlink":
-      appState.l10nsData = appState.l10nsData.filter((v) => v.code !== code);
+      appState.translations = appState.translations.filter(
+        (v) => v.code !== code
+      );
+      if (appState.editor.currentTranslation?.code === code) {
+        appState.editor.currentTranslation = appState.translations[0];
+      }
       break;
   }
 });

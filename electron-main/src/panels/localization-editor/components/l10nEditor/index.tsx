@@ -15,7 +15,7 @@ import styles from "./index.scss";
 export const l10nEditorStyles = "".concat(styles, monacoStyles);
 
 const updateSchema = debounce(() => {
-  const rawLocals = appState.l10nsData.map(({ path }) =>
+  const rawLocals = appState.translations.map(({ path }) =>
     JSON.parse(fs.readFileSync(path, "utf-8"))
   );
 
@@ -44,25 +44,38 @@ export const l10nEditor = defineComponent({
     });
 
     watch(
-      appState.l10nsData,
+      appState.translations,
       () => {
         updateSchema();
-        if (!appState.editor.currentL10n) return;
-        const code = appState.editor.currentL10n.code;
-        if (!appState.l10nsData.some((v) => v.code === code)) {
-          appState.editor.currentL10n = undefined;
+
+        console.log("Translations changed");
+
+        // Case: No translation selected
+        if (!appState.editor.currentTranslation) {
+          appState.editor.currentTranslation = appState.translations[0];
+        }
+
+        const code = appState.editor.currentTranslation.code;
+
+        // Current translation disappeared
+        if (!appState.translations.some((v) => v.code === code)) {
+          appState.editor.currentTranslation = appState.translations[0];
+          console.log("Current translation disappeared");
         }
       },
       { deep: true }
     );
 
     watch(
-      () => appState.editor.currentL10n,
+      () => appState.editor.currentTranslation,
       (curr, prev) => {
         if (!monacoEditor) return;
 
         if (prev) {
-          fs.writeFileSync(prev.path, monacoEditor.getValue());
+          // Previous translation still exists
+          if (appState.translations.some((v) => v.code === prev.code)) {
+            fs.writeFileSync(prev.path, monacoEditor.getValue());
+          }
         }
 
         if (!curr) {
@@ -81,20 +94,20 @@ export const l10nEditor = defineComponent({
     window.addEventListener("message", (ev) => {
       switch (ev.data) {
         case "editor:save":
-          if (!monacoEditor || !appState.editor.currentL10n) return;
+          if (!monacoEditor || !appState.editor.currentTranslation) return;
           fs.writeFileSync(
-            appState.editor.currentL10n?.path,
+            appState.editor.currentTranslation?.path,
             monacoEditor.getValue()
           );
           break;
         case "editor:open":
-          if (!appState.editor.currentL10n) return;
-          shell.showItemInFolder(appState.editor.currentL10n.path);
+          if (!appState.editor.currentTranslation) return;
+          shell.showItemInFolder(appState.editor.currentTranslation.path);
           break;
         case "editor:reload":
-          if (!appState.editor.currentL10n || !monacoEditor) return;
+          if (!appState.editor.currentTranslation || !monacoEditor) return;
           const value = fs.readFileSync(
-            appState.editor.currentL10n.path,
+            appState.editor.currentTranslation.path,
             "utf-8"
           );
           monacoEditor.setValue(value);
@@ -118,7 +131,29 @@ export const l10nEditor = defineComponent({
       });
     });
 
-    return () => <div id="l10nEditor" ref={el}></div>;
+    return () => (
+      <>
+        <div id="l10neditor-container">
+          <div
+            id="l10neditor-spinner"
+            style={
+              appState.editor.currentTranslation
+                ? "display: none"
+                : "display: visible"
+            }
+          ></div>
+          <div
+            id="l10neditor-editor"
+            ref={el}
+            style={
+              appState.editor.currentTranslation
+                ? "display: visible"
+                : "display: none"
+            }
+          ></div>
+        </div>
+      </>
+    );
   },
 });
 
@@ -129,13 +164,6 @@ self.MonacoEnvironment = {
     switch (label) {
       case "json":
         return join(workersRoot, "./json.worker.js");
-      case "css":
-      case "scss":
-      case "less":
-        return join(workersRoot, "./css.worker.js");
-      case "typescript":
-      case "javascript":
-        return join(workersRoot, "./ts.worker.js");
       default:
         return join(workersRoot, "./editor.worker.js");
     }

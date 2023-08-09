@@ -41,7 +41,7 @@ export const previewLanguageModal = defineComponent({
               <div>
                 <div>Language</div>
                 <select name="languageCode" ref={langsSelectRef}>
-                  {Object.values(appState.l10nsData).map((data) => (
+                  {Object.values(appState.translations).map((data) => (
                     <option value={data.code}>
                       {`${capitalizeFirstLetter(getLanguageName(data.code))} (${
                         data.code

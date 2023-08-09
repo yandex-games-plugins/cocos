@@ -21,7 +21,7 @@ export const createL10nModal = defineComponent({
     const modalRef = ref<HTMLDivElement>();
     const langsSelectRef = ref<HTMLSelectElement>();
     const codes = computed<string[]>(() =>
-      appState.l10nsData.map((v) => v.code)
+      appState.translations.map((v) => v.code)
     );
 
     function createLocalization() {

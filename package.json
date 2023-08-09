@@ -86,10 +86,6 @@
       }
     }
   },
-  "devDependencies": {
-    "generate-license-file-webpack-plugin": "^1.0.1",
-    "node-loader": "^2.0.0"
-  },
   "dependencies": {
     "yarn": "^1.22.19"
   }

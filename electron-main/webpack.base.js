@@ -1,3 +1,4 @@
+const { LicenseFilePlugin } = require("generate-license-file-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
@@ -22,8 +23,6 @@ if (process.platform !== "darwin") {
     new webpack.IgnorePlugin({ resourceRegExp: /^fsevents$/ })
   );
 }
-const { LicenseFilePlugin } = require("generate-license-file-webpack-plugin");
-
 /** @type {import('webpack').Configuration} */
 module.exports = {
   target: "electron-main",
@@ -60,8 +59,8 @@ module.exports = {
       },
       {
         test: /.node$/,
-        loader: 'node-loader',
-      }
+        loader: "node-loader",
+      },
     ],
   },
   optimization: {

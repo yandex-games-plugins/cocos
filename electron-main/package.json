@@ -34,6 +34,8 @@
     "monaco-editor": "0.33.0",
     "style-loader": "^3.3.2",
     "ts-toolbelt": "^9.6.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "generate-license-file-webpack-plugin": "^1.0.1",
+    "node-loader": "^2.0.0"
   }
 }

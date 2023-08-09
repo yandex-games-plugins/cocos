@@ -201,7 +201,7 @@ The next step is to configure a local server. Here’s one way to do that:
    > cd PATH_DO_PROJECT/build/
    > openssl genrsa 2048 > key.pem
    > openssl req -x509 -days 365 -new -key key.pem -out cert.pem
-   # заполните необходимую информацию
+   # fill in the required information
    ```
 
 2. Start the local server:

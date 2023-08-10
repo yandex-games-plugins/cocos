@@ -5,6 +5,8 @@
 3. [Localization](#localization)
 4. [Testing](#testing)
 
+[Chinese documentation](README_ZH.md)
+
 ## Getting started
 
 ### Installing the plugin

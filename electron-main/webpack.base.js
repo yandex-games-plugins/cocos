@@ -4,10 +4,11 @@ const path = require("path");
 const webpack = require("webpack");
 
 const entryFiles = [
-  "./src/main.ts",
+  "./src/main/index.ts",
   "./src/scene/index.ts",
   "./src/server.ts",
   "./src/panels/localization-editor/index.ts",
+  "./src/panels/cocos-translations-exporter/index.ts",
   "./src/builder/index.ts",
   "./src/builder/asset-handlers.ts",
   "./src/builder/web-hooks.ts",

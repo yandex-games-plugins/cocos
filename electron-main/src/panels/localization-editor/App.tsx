@@ -25,7 +25,7 @@ export const styles = "".concat(
 );
 
 export default defineComponent({
-  name: "LozalizationEditor",
+  name: "LocalizationEditor",
   components: {
     l10nEditor,
     createL10nModal,

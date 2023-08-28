@@ -9,6 +9,7 @@
     "strictPropertyInitialization": true,
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "types": ["../@cc/cc.d.ts"],
     "paths": {

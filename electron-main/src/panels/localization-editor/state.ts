@@ -1,5 +1,5 @@
 import { reactive } from "vue";
-import { LanguageCode } from "../../../../static/assets/common";
+import { LanguageCode } from "@common";
 
 export type Translation = {
   path: string;

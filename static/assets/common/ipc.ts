@@ -22,6 +22,9 @@ const MainMethodsNames = {
   "check-templates": "checkTemplates",
   "generate-templates": "generateTemplates",
   "get-l10n-bundle": "getL10NBundle",
+  "open-cocos-translations-exporter": "openCocosL10nExporter",
+  "export-cocos-translations-translations": "exportCocosL10nTranslations",
+  "import-cocos-translations-translations": "importCocosL10nTranslations",
 } as const;
 
 export type MainMethods = {
@@ -29,15 +32,21 @@ export type MainMethods = {
   generateTemplates(): void;
   checkTemplates(): void;
   getL10NBundle(): L10NBundle;
+  openCocosL10nExporter(): void;
+  exportCocosL10nTranslations(outputPath: string): void;
+  importCocosL10nTranslations(zipPath: string): void;
 };
 
 export type MainBroadcasts = {
   "yandex-games-sdk:localization-reload": () => void;
 };
 
-function mainRequest<T extends keyof typeof MainMethodsNames>(name: T) {
-  return Editor.Message.request(PACKAGE_NAME, name) as Promise<
-    ReturnType<MainMethods[(typeof MainMethodsNames)[T]]>
+function mainRequest<
+  MethodName extends keyof typeof MainMethodsNames,
+  Method extends MainMethods[(typeof MainMethodsNames)[MethodName]]
+>(name: MethodName, ...args: Parameters<Method>) {
+  return Editor.Message.request(PACKAGE_NAME, name, ...args) as Promise<
+    ReturnType<Method>
   >;
 }
 

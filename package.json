@@ -4,7 +4,7 @@
   "name": "yandex-games-sdk",
   "private": true,
   "description": "i18n:yandex-games-sdk.description",
-  "main": "./dist/electron-main/src/main.js",
+  "main": "./dist/electron-main/src/main/index.js",
   "author": "LisGames",
   "editor": ">=3.6.0",
   "license": "MIT",
@@ -27,6 +27,17 @@
         "width": 1024,
         "height": 600
       }
+    },
+    "cocos-translations-exporter": {
+      "title": "Cocos L10N Exporter",
+      "type": "simple",
+      "main": "dist/electron-main/src/panels/cocos-translations-exporter",
+      "size": {
+        "min-width": 400,
+        "min-height": 300,
+        "width": 400,
+        "height": 300
+      }
     }
   },
   "contributions": {
@@ -40,6 +51,11 @@
         "path": "i18n:yandex-games-sdk.yandex-games-sdk",
         "label": "i18n:yandex-games-sdk.localization-editor",
         "message": "open-localization-editor"
+      },
+      {
+        "path": "i18n:yandex-games-sdk.yandex-games-sdk",
+        "label": "i18n:yandex-games-sdk.cocos-translations-exporter",
+        "message": "open-cocos-translations-exporter"
       },
       {
         "path": "i18n:yandex-games-sdk.yandex-games-sdk",
@@ -71,6 +87,21 @@
       "get-l10n-bundle": {
         "methods": [
           "getL10NBundle"
+        ]
+      },
+      "open-cocos-translations-exporter": {
+        "methods": [
+          "openCocosL10nExporter"
+        ]
+      },
+      "export-cocos-translations-translations": {
+        "methods": [
+          "exportCocosL10nTranslations"
+        ]
+      },
+      "import-cocos-translations-translations": {
+        "methods": [
+          "importCocosL10nTranslations"
         ]
       },
       "yandex-games-sdk:localization-reload": {

@@ -15,6 +15,8 @@ declare module "ysdk" {
 
   namespace YandexGames {
     interface SDK {
+      isAvailableMethod(methodName: string): Promise<boolean>;
+
       environment: {
         get app(): {
           id: string;
@@ -63,7 +65,10 @@ declare module "ysdk" {
         openAuthDialog(): Promise<void>;
       };
 
-      getPlayer(): Promise<Player>;
+      getPlayer(props?: {
+        signed?: boolean;
+        scopes?: boolean;
+      }): Promise<Player>;
 
       feedback: {
         canReview(): Promise<{

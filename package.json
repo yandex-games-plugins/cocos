@@ -13,8 +13,11 @@
     "static"
   ],
   "scripts": {
-    "build": "yarn workspace electron-main run build",
-    "dev": "yarn workspace electron-main run dev"
+    "webpack:electron-main:prod": "webpack --config scripts/webpack.prod.js",
+    "webpack:electron-main:dev": "webpack --config scripts/webpack.dev.js",
+    "bundle": "node scripts/bundle.js",
+    "build": "yarn run webpack:electron-main:prod && yarn run bundle",
+    "dev": "yarn run webpack:electron-main:dev"
   },
   "panels": {
     "localization-editor": {
@@ -86,7 +89,23 @@
       }
     }
   },
-  "dependencies": {
-    "yarn": "^1.22.19"
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.21.2",
+    "@babel/preset-typescript": "^7.21.4",
+    "@vue/babel-plugin-jsx": "^1.1.1",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "raw-loader": "^4.0.2",
+    "sass-loader": "^13.2.2",
+    "typescript": "^5.0.4",
+    "fork-ts-checker-webpack-plugin": "^8.0.0",
+    "style-loader": "^3.3.2",
+    "node-loader": "^2.0.0",
+    "webpack": "^5.79.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-merge": "^5.8.0",
+    "webpack-node-externals": "^3.0.0",
+    "archiver": "^6.0.1"
   }
 }

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2023.09.28
+
+### Added
+
+- Fixed missing bundle dependencies
+
 ## [1.0.2] - 2023.09.14
 
 ### Added

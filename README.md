@@ -9,7 +9,11 @@
 
 ## Getting started
 
-### Installing the plugin
+### Installing the plugin from the Cocos Store
+You can install plugin directrly from the Cocos Store
+https://store.cocos.com/app/en/detail/5341
+
+### Installing the plugin from the repository
 
 After [downloading the plugin](https://github.com/yandex-games-plugins/cocos/releases/latest), open your project in Cocos Creator or create a new one. In the upper panel, hover over _Extension_ and select _Extension Manager_.
 

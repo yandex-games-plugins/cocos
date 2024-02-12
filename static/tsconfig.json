@@ -26,7 +26,6 @@
     "experimentalDecorators": true,
     "declaration": false,
     "skipLibCheck": true,
-    "emitDeclarationOnly": true,
     "noEmit": true,
     "types": [
       "../@cc/cc.d.ts",

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2024.02.12
+
+### Added
+
+- Type definintions for remote config
+
 ## [1.0.4] - 2023.10.11
 
 ### Added

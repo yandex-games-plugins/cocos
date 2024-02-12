@@ -15,35 +15,15 @@ declare module "ysdk" {
 
   namespace YandexGames {
     interface SDK {
-      isAvailableMethod(methodName: string): Promise<boolean>;
+      environment: Environment;
 
-      environment: {
-        get app(): {
-          id: string;
-        };
-        get browser(): {
-          lang: string;
-        };
-        get i18n(): {
-          lang: ISO_639_1;
-          tld: TopLevelDomain;
-        };
-        get payload(): string | null;
-      };
+      deviceInfo: DeviceInfo;
 
-      deviceInfo: {
-        get type(): string;
-        isMobile(): boolean;
-        isTablet(): boolean;
-        isDesktop(): boolean;
-        isTV(): boolean;
-      };
-
-      features: {
+      features: Partial<{
         LoadingAPI: {
           ready(): void;
         };
-      };
+      }>;
 
       clipboard: {
         writeText(text: string): void;
@@ -65,10 +45,9 @@ declare module "ysdk" {
         openAuthDialog(): Promise<void>;
       };
 
-      getPlayer(props?: {
-        signed?: boolean;
-        scopes?: boolean;
-      }): Promise<Player>;
+      getPlayer<TSigned extends boolean = false>(opts: {
+        signed?: TSigned;
+      }): Promise<TSigned extends true ? Signed<Player> : Player>;
 
       feedback: {
         canReview(): Promise<{
@@ -108,22 +87,66 @@ declare module "ysdk" {
       };
 
       EVENTS: {
-        EXIT: ESdkEventName.EXIT;
-        HISTORY_BACK: ESdkEventName.HISTORY_BACK;
+        EXIT: "EXIT";
+        HISTORY_BACK: "HISTORY_BACK";
       };
 
-      dispatchEvent(eventName: ESdkEventName, detail?: any): Promise<unknown>;
+      dispatchEvent(eventName: SdkEventName, detail?: any): Promise<unknown>;
 
-      onEvent(eventName: ESdkEventName, listener: Function): () => void;
+      onEvent(eventName: SdkEventName, listener: Function): () => void;
 
       shortcut: {
         canShowPrompt(): Promise<{ canShow: boolean }>;
         showPrompt(): Promise<{ outcome: "accepted" | "rejected" }>;
       };
 
-      getPayments(opts?: { signed?: boolean }): Promise<Payments>;
+      getPayments<TSigned extends boolean = false>(opts?: {
+        signed?: TSigned;
+      }): Promise<Payments<TSigned>>;
 
       getLeaderboards(): Promise<Leaderboards>;
+
+      getFlags(params?: GetFlagsParams): Promise<IFlags>;
+
+      isAvailableMethod(methodName: string): Promise<boolean>;
+    }
+
+    interface IFlags {
+      [key: string]: string;
+    }
+
+    interface ClientFeature {
+      name: string;
+      value: string;
+    }
+
+    interface GetFlagsParams {
+      defaultFlags?: IFlags;
+      clientFeatures?: ClientFeature[];
+    }
+
+    type Signed<T> = T & { signature: string };
+
+    export interface Environment {
+      get app(): {
+        id: string;
+      };
+      get browser(): {
+        lang: string;
+      };
+      get i18n(): {
+        lang: ISO_639_1;
+        tld: TopLevelDomain;
+      };
+      get payload(): string | null;
+    }
+
+    export interface DeviceInfo {
+      get type(): string;
+      isMobile(): boolean;
+      isTablet(): boolean;
+      isDesktop(): boolean;
+      isTV(): boolean;
     }
 
     export type SafeStorage = typeof localStorage;
@@ -143,14 +166,12 @@ declare module "ysdk" {
       incrementStats<TStats extends Record<string, number>>(
         stats: Partial<TStats>
       ): Promise<Partial<TStats>>;
-      signature: string;
     }
 
     export interface Purchase {
       productID: string;
       purchaseToken: string;
       developerPayload?: string;
-      signature: string;
     }
 
     export interface Product {
@@ -164,41 +185,32 @@ declare module "ysdk" {
       price: string;
       priceValue: string;
       priceCurrencyCode: string;
-      getPriceCurrencyImage(size: ECurrencyImageSize): string;
+      getPriceCurrencyImage(size: CurrencyImageSize): string;
     }
 
-    export interface Payments {
-      getPurchases(): Promise<Purchase[]>;
+    export interface Payments<TSigned extends boolean = false> {
+      getPurchases(): Promise<
+        TSigned extends true ? Signed<Purchase[]> : Purchase[]
+      >;
       getCatalog(): Promise<Product[]>;
       purchase(opts?: {
         id: string;
         developerPayload?: string;
-      }): Promise<Purchase>;
+      }): Promise<TSigned extends true ? Signed<Purchase> : Purchase>;
       consumePurchase(token: string): Promise<void>;
     }
 
-    export enum FeedbackError {
-      NO_AUTH = "NO_AUTH",
-      GAME_RATED = "GAME_RATED",
-      REVIEW_ALREADY_REQUESTED = "REVIEW_ALREADY_REQUESTED",
-      UNKNOWN = "UNKNOWN",
-    }
+    type FeedbackError =
+      | "NO_AUTH"
+      | "GAME_RATED"
+      | "REVIEW_ALREADY_REQUESTED"
+      | "UNKNOWN";
 
-    export enum StickyAdvError {
-      ADV_IS_NOT_CONNECTED = "ADV_IS_NOT_CONNECTED",
-      UNKNOWN = "UNKNOWN",
-    }
+    type StickyAdvError = "ADV_IS_NOT_CONNECTED" | "UNKNOWN";
 
-    export enum ESdkEventName {
-      EXIT = "EXIT",
-      HISTORY_BACK = "HISTORY_BACK",
-    }
+    type SdkEventName = "EXIT" | "HISTORY_BACK";
 
-    export enum ECurrencyImageSize {
-      SMALL = "small",
-      MEDIUM = "medium",
-      SVG = "svg",
-    }
+    type CurrencyImageSize = "small" | "medium" | "svg";
 
     export interface Leaderboards {
       getLeaderboardDescription(
@@ -225,12 +237,14 @@ declare module "ysdk" {
           quantityAround?: number;
           quantityTop?: number;
         }
-      ): Promise<{
-        leaderboard: LeaderboardDescription;
-        ranges: { start: number; size: number }[];
-        userRank: number;
-        entries: LeaderboardEntry[];
-      }>;
+      ): Promise<LeaderboardEntriesData>;
+    }
+
+    export interface LeaderboardEntriesData {
+      leaderboard: LeaderboardDescription;
+      ranges: { start: number; size: number }[];
+      userRank: number;
+      entries: LeaderboardEntry[];
     }
 
     export interface LeaderboardEntry {
@@ -268,98 +282,11 @@ declare module "ysdk" {
         [lang: string]: string;
       };
     }
+
+    /* prettier-ignore */
+    export type ISO_639_1 = 'af' | 'am' | 'ar' | 'az' | 'be' | 'bg' | 'bn' | 'ca' | 'cs' | 'da' | 'de' | 'el' | 'en' | 'es' | 'et' | 'eu' | 'fa' | 'fi' | 'fr' | 'gl' | 'he' | 'hi' | 'hr' | 'hu' | 'hy' | 'id' | 'is' | 'it' | 'ja' | 'ka' | 'kk' | 'km' | 'kn' | 'ko' | 'ky' | 'lo' | 'lt' | 'lv' | 'mk' | 'ml' | 'mn' | 'mr' | 'ms' | 'my' | 'ne' | 'nl' | 'no' | 'pl' | 'pt' | 'ro' | 'ru' | 'si' | 'sk' | 'sl' | 'sr' | 'sv' | 'sw' | 'ta' | 'te' | 'tg' | 'th' | 'tk' | 'tl' | 'tr' | 'uk' | 'ur' | 'uz' | 'vi' | 'zh' | 'zu';
+
+    /* prettier-ignore */
+    export type TopLevelDomain = 'az' | 'by' | 'co.il' | 'com' | 'com.am' | 'com.ge' | 'com.tr' | 'ee' | 'fr' | 'kg' | 'kz' | 'lt' | 'lv' | 'md' | 'ru' | 'tj' | 'tm' | 'ua' | 'uz';
   }
-
-  export type ISO_639_1 =
-    | "af"
-    | "am"
-    | "ar"
-    | "az"
-    | "be"
-    | "bg"
-    | "bn"
-    | "ca"
-    | "cs"
-    | "da"
-    | "de"
-    | "el"
-    | "en"
-    | "es"
-    | "et"
-    | "eu"
-    | "fa"
-    | "fi"
-    | "fr"
-    | "gl"
-    | "he"
-    | "hi"
-    | "hr"
-    | "hu"
-    | "hy"
-    | "id"
-    | "is"
-    | "it"
-    | "ja"
-    | "ka"
-    | "kk"
-    | "km"
-    | "kn"
-    | "ko"
-    | "ky"
-    | "lo"
-    | "lt"
-    | "lv"
-    | "mk"
-    | "ml"
-    | "mn"
-    | "mr"
-    | "ms"
-    | "my"
-    | "ne"
-    | "nl"
-    | "no"
-    | "pl"
-    | "pt"
-    | "ro"
-    | "ru"
-    | "si"
-    | "sk"
-    | "sl"
-    | "sr"
-    | "sv"
-    | "sw"
-    | "ta"
-    | "te"
-    | "tg"
-    | "th"
-    | "tk"
-    | "tl"
-    | "tr"
-    | "uk"
-    | "ur"
-    | "uz"
-    | "vi"
-    | "zh"
-    | "zu";
-
-  export type TopLevelDomain =
-    | "az"
-    | "by"
-    | "co.il"
-    | "com"
-    | "com.am"
-    | "com.ge"
-    | "com.tr"
-    | "ee"
-    | "fr"
-    | "kg"
-    | "kz"
-    | "lt"
-    | "lv"
-    | "md"
-    | "ru"
-    | "tj"
-    | "tm"
-    | "ua"
-    | "uz";
 }

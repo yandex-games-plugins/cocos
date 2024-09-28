@@ -5,7 +5,7 @@ const package = require("../package.json");
 
 const config = {
   folders: ["@cc", "@types", "dist", "docs", "i18n", "static"],
-  modules: ["@babel", "i18next", "regenerator-runtime"],
+  modules: ["@babel", "i18next", "regenerator-runtime", "@types/ysdk"],
   files: [
     "AUTHORS",
     "CHANGELOG.md",

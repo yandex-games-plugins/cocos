@@ -1,9 +1,9 @@
-import { YandexGames } from "ysdk";
+import type { SDK } from "ysdk";
 import { game, cclegacy } from "cc";
 import { EDITOR } from "cc/env";
 import { L10NManager } from "./core/l10n";
 
-export let ysdk = {} as YandexGames.SDK;
+export let ysdk = {} as SDK;
 
 export const l10n = L10NManager.instance;
 

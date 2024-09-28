@@ -413,6 +413,11 @@
   resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-9.0.4.tgz#e884a59338da907bda8d2ed03e01c5c49d036f1c"
   integrity sha512-zAuJWQflfx6dYJM62vna+Sn5aeSWhh3OB+wfUEACNcqUSc0AGc5JKl+ycL1vrH7frGTXhJchYjE1Hak8L819dA==
 
+"@types/ysdk@^1.0.5":
+  version "1.0.5"
+  resolved "https://npm.lisgames.ru/@types/ysdk/-/ysdk-1.0.5.tgz#cd13fe66e96663dd0c30bbeb61d3513bdfbd99ff"
+  integrity sha512-zQgSxm4bXaT0LzNtB/goDRgBZbjVse0BYXFJOqvw8fgIxfbTP/sL1eJrgTF7t0QgMn/obgMwANnk/csZVchwpw==
+
 "@vue/babel-helper-vue-transform-on@^1.1.5":
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/@vue/babel-helper-vue-transform-on/-/babel-helper-vue-transform-on-1.1.5.tgz#a976486b21e108e545524fe41ffe3fc9bbc28c7f"

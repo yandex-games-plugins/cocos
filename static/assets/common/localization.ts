@@ -1,5 +1,3 @@
-import { TopLevelDomain } from "ysdk";
-
 export const LanguageCode = {
   AF: "af",
   AM: "am",
@@ -393,8 +391,6 @@ const TLD2LangCodeMap = {
   tm: "tk",
   ua: "uk",
   uz: "uz",
-} as const;
+} as Record<string, string>;
 
-export const domainToLanguageCode = <T extends TopLevelDomain>(
-  domain: T
-): (typeof TLD2LangCodeMap)[T] => TLD2LangCodeMap[domain];
+export const domainToLanguageCode = (domain: string): string => TLD2LangCodeMap[domain] ?? "en";

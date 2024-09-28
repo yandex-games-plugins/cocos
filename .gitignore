@@ -38,3 +38,4 @@ testem.log
 Thumbs.db
 
 /deploy
+*.meta

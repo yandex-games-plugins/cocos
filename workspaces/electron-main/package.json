@@ -1,0 +1,37 @@
+{
+  "name": "@yandex-games-sdk/electron-main",
+  "private": true,
+  "scripts": {
+    "build": "webpack --config webpack.config.js --env production",
+    "build:watch": "webpack --config webpack.config.js --env development"
+  },
+  "dependencies": {
+    "@cocos/creator-types": "^3.8.4",
+    "@fastify/deepmerge": "^2.0.0",
+    "@types/fs-extra": "^11.0.4",
+    "@types/lodash": "^4.17.9",
+    "@types/ysdk": "^1.0.6",
+    "@yandex-games-sdk/common": "file:../common",
+    "chokidar": "^4.0.1",
+    "electron": "^32.1.2",
+    "fs-extra": "^11.2.0",
+    "lodash": "^4.17.21",
+    "monaco-editor": "^0.33.0",
+    "sass": "^1.79.4",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.24.8",
+    "@babel/preset-typescript": "^7.24.7",
+    "@vue/babel-plugin-jsx": "^1.2.5",
+    "babel-loader": "^9.2.1",
+    "css-loader": "^7.1.2",
+    "raw-loader": "^4.0.2",
+    "sass-loader": "^16.0.2",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
+  }
+}

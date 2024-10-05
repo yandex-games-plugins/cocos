@@ -1,0 +1,28 @@
+{
+  "name": "@yandex-games-sdk/common",
+  "private": true,
+  "exports": {
+    "import": "./dist/es/index.js",
+    "types": "./dist/types/index.d.ts",
+    "default": "./dist/cjs/index.js"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/es/index.js",
+  "types": "./dist/types/index.d.ts",
+  "scripts": {
+    "postinstall": "node prepare.mjs",
+    "build": "node prepare.mjs && rollup -c",
+    "build:watch": "node prepare.mjs && rollup -c -w"
+  },
+  "dependencies": {
+    "@cocos/creator-types": "^3.8.4",
+    "@types/ysdk": "^1.0.6"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^12.1.0",
+    "rollup": "^4.22.5",
+    "rollup-plugin-dts": "^6.1.1",
+    "stringify-object": "^5.0.0",
+    "tslib": "^2.7.0"
+  }
+}

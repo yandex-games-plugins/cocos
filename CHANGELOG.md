@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2024.10.5
+
+### Added
+
+- New type definitions for Yandex Games SDK new features
+- Support for Cocos Creator 3.8.X versions
+
+### Fixed
+
+- Broken localization editor in Cocos Creator 3.8.X
+- Fixed unstable behavior of build process
+- Stability improvements
+- Minor bug fixes
+
 ## [1.0.5] - 2024.02.12
 
 ### Added

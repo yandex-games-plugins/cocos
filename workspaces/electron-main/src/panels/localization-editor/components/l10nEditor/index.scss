@@ -1,0 +1,28 @@
+#l10neditor-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#l10neditor-editor {
+  width: 100%;
+  height: 100%;
+}
+
+#l10neditor-spinner {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 6px solid #525252;
+  border-radius: 50%;
+  border-top-color: #ccc;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

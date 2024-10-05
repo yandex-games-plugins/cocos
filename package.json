@@ -1,29 +1,25 @@
 {
   "package_version": 2,
-  "version": "1.0.5",
+  "version": "2.0.0",
   "name": "yandex-games-sdk",
   "private": true,
   "description": "i18n:yandex-games-sdk.description",
-  "main": "./dist/electron-main/src/main.js",
+  "main": "./workspaces/electron-main/dist/src/main.js",
   "author": "LisGames",
   "editor": ">=3.6.0",
   "license": "MIT",
-  "workspaces": [
-    "electron-main",
-    "static"
-  ],
+  "packageManager": "npm@10.2.3",
+  "workspaces": ["workspaces/*"],
   "scripts": {
-    "webpack:electron-main:prod": "webpack --config scripts/webpack.prod.js",
-    "webpack:electron-main:dev": "webpack --config scripts/webpack.dev.js",
-    "bundle": "node scripts/bundle.js",
-    "build": "yarn run webpack:electron-main:prod && yarn run bundle",
-    "dev": "yarn run webpack:electron-main:dev"
+    "bundle": "node scripts/bundle.mjs",
+    "build": "turbo build",
+    "build:watch": "turbo build:watch"
   },
   "panels": {
     "localization-editor": {
       "title": "Localization Editor",
       "type": "dockable",
-      "main": "dist/electron-main/src/panels/localization-editor",
+      "main": "workspaces/electron-main/dist/src/panels/localization-editor",
       "size": {
         "min-width": 400,
         "min-height": 300,
@@ -33,10 +29,10 @@
     }
   },
   "contributions": {
-    "builder": "dist/electron-main/src/builder/index.js",
-    "server": "dist/electron-main/src/server.js",
+    "builder": "workspaces/electron-main/dist/src/builder/index.js",
+    "server": "workspaces/electron-main/dist/src/server.js",
     "scene": {
-      "script": "dist/electron-main/src/scene/index.js"
+      "script": "workspaces/electron-main/dist/src/scene/index.js"
     },
     "menu": [
       {
@@ -57,55 +53,45 @@
     ],
     "messages": {
       "open-localization-editor": {
-        "methods": [
-          "openLocalizationEditor"
-        ]
+        "methods": ["openLocalizationEditor"]
       },
       "generate-templates": {
-        "methods": [
-          "generateTemplates"
-        ]
+        "methods": ["generateTemplates"]
       },
       "check-templates": {
-        "methods": [
-          "checkTemplates"
-        ]
+        "methods": ["checkTemplates"]
       },
       "get-l10n-bundle": {
-        "methods": [
-          "getL10NBundle"
-        ]
-      },
-      "yandex-games-sdk:localization-reload": {
-        "public": true,
-        "description": "Localizations reload message"
+        "methods": ["getL10NBundle"]
       }
     },
     "asset-db": {
       "mount": {
-        "path": "./static/assets",
+        "path": "./workspaces/static/assets",
         "readonly": true,
-        "visible": true
+        "visible": "visibleL10nEditor",
+        "enable": "enableL10nEditor"
+      }
+    },
+    "profile": {
+      "project": {
+        "enableL10nEditor": {
+          "default": true
+        },
+        "visibleL10nEditor": {
+          "default": true
+        }
       }
     }
   },
+  "dependencies": {
+    "@cocos/creator-types": "^3.8.4",
+    "@types/ysdk": "^1.0.6"
+  },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
-    "@babel/plugin-transform-modules-commonjs": "^7.21.2",
-    "@babel/preset-typescript": "^7.21.4",
-    "@vue/babel-plugin-jsx": "^1.1.1",
-    "babel-loader": "^9.1.2",
-    "css-loader": "^6.7.3",
-    "raw-loader": "^4.0.2",
-    "sass-loader": "^13.2.2",
-    "typescript": "^5.0.4",
-    "fork-ts-checker-webpack-plugin": "^8.0.0",
-    "style-loader": "^3.3.2",
-    "node-loader": "^2.0.0",
-    "webpack": "^5.79.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-merge": "^5.8.0",
-    "webpack-node-externals": "^3.0.0",
-    "archiver": "^6.0.1"
+    "@biomejs/biome": "^1.9.2",
+    "archiver": "^6.0.1",
+    "turbo": "^2.1.2",
+    "typescript": "^5.0.4"
   }
 }

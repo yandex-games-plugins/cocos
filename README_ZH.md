@@ -41,7 +41,7 @@
 
 ```tsx
 import { Component } from "cc";
-import { ysdk } from "extensions/yandex-games-sdk/static/assets/ysdk";
+import { ysdk } from "db://yandex-games-sdk/ysdk";
 const { ccclass, property } = _decorator;
 
 @ccclass("YourGameComponent")
@@ -64,7 +64,7 @@ export class YourGameComponent extends Component {
 
 ```tsx
 import { _decorator, Button, Component } from "cc";
-import { ysdk } from "extensions/yandex-games-sdk/static/assets/ysdk";
+import { ysdk } from "db://yandex-games-sdk/ysdk";
 const { ccclass, property, requireComponent } = _decorator;
 
 @ccclass("RewardADButton")
@@ -128,7 +128,7 @@ export class RewardADButton extends Component {
 
 ```tsx
 import { _decorator, Component, Label } from "cc";
-import { l10n } from "../extensions/yandex-games-sdk/static/assets/ysdk";
+import { l10n } from "../db://yandex-games-sdk/ysdk";
 const { ccclass, requireComponent } = _decorator;
 
 @ccclass("ButtonLozalizationTest") // Component name

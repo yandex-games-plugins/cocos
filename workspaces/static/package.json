@@ -1,0 +1,8 @@
+{
+  "name": "@yandex-games-sdk/static",
+  "private": true,
+  "dependencies": {
+    "@yandex-games-sdk/common": "file:../common",
+    "i18next": "^23.15.1"
+  }
+}

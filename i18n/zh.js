@@ -1,4 +1,3 @@
-"use strict";
 module.exports = {
   "yandex-games-sdk": "Yandex.Games SDK",
   "localization-editor": "Localization Editor",

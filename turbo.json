@@ -1,0 +1,17 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "@yandex-games-sdk/electron-main#build": {
+      "dependsOn": ["@yandex-games-sdk/common#build"]
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
+    },
+    "build:watch": {
+      "outputs": ["dist/**"],
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

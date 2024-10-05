@@ -45,7 +45,7 @@ Here’s an example of how to use [environment variables](https://yandex.ru/dev/
 
 ```tsx
 import { Component } from "cc";
-import { ysdk } from "extensions/yandex-games-sdk/static/assets/ysdk";
+import { ysdk } from "db://yandex-games-sdk/ysdk";
 const { ccclass, property } = _decorator;
 
 @ccclass("YourGameComponent")
@@ -68,7 +68,7 @@ We’ll also add the `OnReward` method and pass it as a callback for the `add.ad
 
 ```tsx
 import { _decorator, Button, Component } from "cc";
-import { ysdk } from "extensions/yandex-games-sdk/static/assets/ysdk";
+import { ysdk } from "db://yandex-games-sdk/ysdk";
 const { ccclass, property, requireComponent } = _decorator;
 
 @ccclass("RewardADButton")
@@ -132,7 +132,7 @@ Let's try using the l10n.t() method first. Create a new component and enter the 
 
 ```tsx
 import { _decorator, Component, Label } from "cc";
-import { l10n } from "../extensions/yandex-games-sdk/static/assets/ysdk";
+import { l10n } from "db://yandex-games-sdk/ysdk";
 const { ccclass, requireComponent } = _decorator;
 
 @ccclass("ButtonLozalizationTest") // Component name

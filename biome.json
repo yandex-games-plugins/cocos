@@ -1,0 +1,58 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "overrides": [
+    {
+      "include": ["**/dist/**", "**/monaco.css", "**/monaco/**"],
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "enabled": false
+      },
+      "organizeImports": {
+        "enabled": false
+      }
+    }
+  ],
+  "formatter": {
+    "lineWidth": 100,
+    "indentWidth": 2,
+    "indentStyle": "space"
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "rules": {
+      "a11y": {
+        "useKeyWithClickEvents": "off"
+      },
+      "style": {
+        "useExponentiationOperator": "off",
+        "noNonNullAssertion": "off",
+        "noArguments": "off",
+        "useImportType": "warn",
+        "useNodejsImportProtocol": "off",
+        "noParameterAssign": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noAssignInExpressions": "off",
+        "noDebugger": "off"
+      },
+      "complexity": {
+        "useArrowFunction": "off",
+        "noBannedTypes": "off",
+        "useLiteralKeys": "off"
+      },
+      "correctness": {
+        "noUnusedImports": "warn"
+      }
+    }
+  }
+}

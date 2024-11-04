@@ -56,9 +56,9 @@ export const methods: MainMethods = {
         continue;
       }
 
-      if (!fs.readFileSync(projectPath, "utf-8").includes("https://yandex.ru/games/sdk/v2")) {
+      if (!fs.readFileSync(projectPath, "utf-8").includes("/sdk.js")) {
         logger.warn(
-          `Your ${path.replace("/index.ejs", "")} template doesn't have YandexGames.SDK imported!`,
+          `Your ${path.replace("/index.ejs", "")} template doesn't have YandexGames.SDK imported! Please consider changing it according to Yandex.Games SDK init docs.`,
         );
         ok = false;
       }

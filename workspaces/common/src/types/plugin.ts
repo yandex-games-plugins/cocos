@@ -1,6 +1,6 @@
 export const PluginPackage = {
   package_version: 2,
-  version: "2.0.0",
+  version: "2.1.0",
   name: "yandex-games-sdk",
   private: true,
   description: "i18n:yandex-games-sdk.description",
@@ -62,7 +62,7 @@ export const PluginPackage = {
       project: { enableL10nEditor: { default: true }, visibleL10nEditor: { default: true } },
     },
   },
-  dependencies: { "@cocos/creator-types": "^3.8.4", "@types/ysdk": "^1.0.6" },
+  dependencies: { "@cocos/creator-types": "^3.8.4", "@types/ysdk": "^1.0.7" },
   devDependencies: {
     "@biomejs/biome": "^1.9.2",
     archiver: "^6.0.1",

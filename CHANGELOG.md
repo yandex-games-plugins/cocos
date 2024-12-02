@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2024.12.2
+
+### Added
+
+- New [Game API](https://yandex.ru/dev/games/doc/en/sdk/sdk-events#game_api_pause-and-game_api_resume-events) events type definitions
+- New [link to other games functionality](https://yandex.ru/dev/games/doc/en/sdk/sdk-other-games) type definitions
+- Replaced URL of the Yandex.Games SDK in templates
+
+### Fixed
+
+- Yandex.Games SDK import detection in templates
+
 ## [2.0.0] - 2024.10.5
 
 ### Added

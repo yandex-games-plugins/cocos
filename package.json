@@ -13,7 +13,7 @@
     "workspaces/*"
   ],
   "scripts": {
-    "bundle": "node scripts/bundle.mjs",
+    "bundle": "turbo build && node scripts/bundle.mjs",
     "build": "turbo build",
     "build:watch": "turbo build:watch",
     "lint": "eslint .",

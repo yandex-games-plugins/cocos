@@ -1,10 +1,14 @@
-import { join } from "path";
 import type { SceneMethods } from "@yandex-games-sdk/common";
 import * as fs from "fs-extra";
+import { join } from "path";
 import type { ISO_639_1 } from "ysdk";
+
 import { l10nWrapper } from "./l10n-wrapper";
 
-const translateDataRoot = join(Editor.Project.path, "yandex-games-sdk/translate-data/");
+const translateDataRoot = join(
+  Editor.Project.path,
+  "yandex-games-sdk/translate-data/",
+);
 if (!fs.existsSync(translateDataRoot)) {
   fs.mkdirSync(translateDataRoot, { recursive: true });
 }

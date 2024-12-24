@@ -1,6 +1,6 @@
-import { type L10NBundle, ipc, logger, plugin } from "@yandex-games-sdk/common";
-import { type AssetManager, assetManager } from "cc";
+import { ipc, type L10NBundle, logger, plugin } from "@yandex-games-sdk/common";
 import type { JsonAsset } from "cc";
+import { type AssetManager, assetManager } from "cc";
 // @ts-ignore
 import { BUILD, EDITOR } from "cc/env";
 
@@ -18,21 +18,26 @@ export function fetchL10NBundle(): Promise<L10NBundle> {
 
 async function runtimeLoad(path: string) {
   return new Promise<L10NBundle>((resolve, reject) => {
-    assetManager.loadBundle(plugin.l10nBundle.name, (error, bundle: AssetManager.Bundle) => {
-      if (error) {
-        logger.error(`Can't load ${plugin.l10nBundle.name} from AssetManager`);
-        reject(error);
-      }
-
-      bundle.load<JsonAsset>(path, (error, asset) => {
+    assetManager.loadBundle(
+      plugin.l10nBundle.name,
+      (error, bundle: AssetManager.Bundle) => {
         if (error) {
-          logger.error(`Can't load ${path} in runtime`);
+          logger.error(
+            `Can't load ${plugin.l10nBundle.name} from AssetManager`,
+          );
           reject(error);
         }
 
-        resolve(asset.json as L10NBundle);
-      });
-    });
+        bundle.load<JsonAsset>(path, (error, asset) => {
+          if (error) {
+            logger.error(`Can't load ${path} in runtime`);
+            reject(error);
+          }
+
+          resolve(asset.json as L10NBundle);
+        });
+      },
+    );
   });
 }
 

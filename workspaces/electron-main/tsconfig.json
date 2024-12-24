@@ -29,6 +29,11 @@
     "resolveJsonModule": true,
     "jsx": "preserve",
     "jsxImportSource": "vue",
-    "types": ["node", "vue", "@cocos/creator-types/editor", "@cocos/creator-types/engine"]
+    "types": [
+      "node",
+      "vue",
+      "@cocos/creator-types/editor",
+      "@cocos/creator-types/engine"
+    ]
   }
 }

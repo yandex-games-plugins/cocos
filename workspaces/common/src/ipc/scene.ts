@@ -1,4 +1,5 @@
 import type { ISO_639_1 } from "ysdk";
+
 import { plugin } from "../constants";
 
 export type SceneMethods = {
@@ -8,7 +9,10 @@ export type SceneMethods = {
 };
 
 export default {
-  request<T extends keyof SceneMethods>(method: T, ...args: Parameters<SceneMethods[T]>) {
+  request<T extends keyof SceneMethods>(
+    method: T,
+    ...args: Parameters<SceneMethods[T]>
+  ) {
     return Editor.Message.request("scene", "execute-scene-script", {
       name: plugin.name,
       method,

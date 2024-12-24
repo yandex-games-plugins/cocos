@@ -281,6 +281,8 @@ const LANGUAGE_NAMES = {
   },
 };
 
-export const languageName = (code: string): string => LANGUAGE_NAMES[code]?.name ?? "";
+export const languageName = (code: string): string =>
+  LANGUAGE_NAMES[code]?.name ?? "";
 
-export const languageNativeName = (code: string): string => LANGUAGE_NAMES[code]?.nativeName ?? "";
+export const languageNativeName = (code: string): string =>
+  LANGUAGE_NAMES[code]?.nativeName ?? "";

@@ -1,15 +1,14 @@
-import * as monaco from "monaco-editor";
-import monacoStyles from "./monaco.css";
-
-import styles from "./index.scss";
-
-import { join } from "path";
 import { deepmerge } from "@fastify/deepmerge";
 import { shell } from "electron";
 import * as fs from "fs-extra";
 import { debounce } from "lodash";
+import * as monaco from "monaco-editor";
+import { join } from "path";
 import { defineComponent, onMounted, ref, watch } from "vue";
+
 import { appState } from "../../state";
+import styles from "./index.scss";
+import monacoStyles from "./monaco.css";
 
 export const l10nEditorStyles = "".concat(styles, monacoStyles);
 
@@ -120,7 +119,10 @@ export const l10nEditor = defineComponent({
       switch (ev.data) {
         case "editor:save":
           if (!monacoEditor || !appState.editor.currentTranslation) return;
-          fs.writeFileSync(appState.editor.currentTranslation?.path, monacoEditor.getValue());
+          fs.writeFileSync(
+            appState.editor.currentTranslation?.path,
+            monacoEditor.getValue(),
+          );
           break;
         case "editor:open":
           if (!appState.editor.currentTranslation) return;
@@ -128,7 +130,10 @@ export const l10nEditor = defineComponent({
           break;
         case "editor:reload": {
           if (!appState.editor.currentTranslation || !monacoEditor) return;
-          const value = fs.readFileSync(appState.editor.currentTranslation.path, "utf-8");
+          const value = fs.readFileSync(
+            appState.editor.currentTranslation.path,
+            "utf-8",
+          );
           monacoEditor.setValue(value);
           break;
         }
@@ -156,12 +161,20 @@ export const l10nEditor = defineComponent({
         <div id="l10neditor-container">
           <div
             id="l10neditor-spinner"
-            style={appState.editor.currentTranslation ? "display: none" : "display: visible"}
+            style={
+              appState.editor.currentTranslation
+                ? "display: none"
+                : "display: visible"
+            }
           />
           <div
             id="l10neditor-editor"
             ref={el}
-            style={appState.editor.currentTranslation ? "display: visible" : "display: none"}
+            style={
+              appState.editor.currentTranslation
+                ? "display: visible"
+                : "display: none"
+            }
           />
         </div>
       </>

@@ -14,6 +14,10 @@ export const PluginPackage = {
     bundle: "node scripts/bundle.mjs",
     build: "turbo build",
     "build:watch": "turbo build:watch",
+    lint: "eslint .",
+    "lint:fix": "eslint . --fix",
+    format: "prettier . --check",
+    "format:fix": "prettier . --write",
   },
   panels: {
     "localization-editor": {
@@ -59,14 +63,23 @@ export const PluginPackage = {
       },
     },
     profile: {
-      project: { enableL10nEditor: { default: true }, visibleL10nEditor: { default: true } },
+      project: {
+        enableL10nEditor: { default: true },
+        visibleL10nEditor: { default: true },
+      },
     },
   },
   dependencies: { "@cocos/creator-types": "^3.8.4", "@types/ysdk": "^1.0.7" },
   devDependencies: {
-    "@biomejs/biome": "^1.9.2",
+    "@eslint/js": "^9.17.0",
     archiver: "^6.0.1",
+    eslint: "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    prettier: "^3.4.2",
     turbo: "^2.1.2",
     typescript: "^5.0.4",
+    "typescript-eslint": "^8.18.2",
   },
 } as const;

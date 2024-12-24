@@ -1,16 +1,19 @@
-import { join } from "path";
 import {
-  type L10NBundle,
-  type MainMethods,
   isLanguageCode,
+  type L10NBundle,
   logger,
+  type MainMethods,
 } from "@yandex-games-sdk/common";
 import * as fs from "fs-extra";
+import { join } from "path";
 import type { ISO_639_1 } from "ysdk";
 
 const pluginRoot = join(__dirname, "../../../");
 
-const translateDataRoot = join(Editor.Project.path, "yandex-games-sdk/translate-data/");
+const translateDataRoot = join(
+  Editor.Project.path,
+  "yandex-games-sdk/translate-data/",
+);
 if (!fs.existsSync(translateDataRoot)) {
   fs.mkdirSync(translateDataRoot, { recursive: true });
 }
@@ -51,7 +54,9 @@ export const methods: MainMethods = {
       const projectPath = join(Editor.Project.path, path);
 
       if (!fs.existsSync(projectPath)) {
-        logger.warn(`Failed to find ${path.replace("/index.ejs", "")} template!`);
+        logger.warn(
+          `Failed to find ${path.replace("/index.ejs", "")} template!`,
+        );
         ok = false;
         continue;
       }
@@ -70,7 +75,10 @@ export const methods: MainMethods = {
   getL10NBundle(): L10NBundle {
     const languages = fs
       .readdirSync(translateDataRoot)
-      .filter((name) => ".json" === name.slice(-5) && isLanguageCode(name.slice(0, -5)))
+      .filter(
+        (name) =>
+          ".json" === name.slice(-5) && isLanguageCode(name.slice(0, -5)),
+      )
       .map((n) => n.slice(0, -5) as ISO_639_1);
 
     return {

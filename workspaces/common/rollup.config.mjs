@@ -1,9 +1,12 @@
 import { readFileSync } from "node:fs";
 import { builtinModules } from "node:module";
+
 import typescript from "@rollup/plugin-typescript";
 import { dts } from "rollup-plugin-dts";
 
-const pkg = JSON.parse(readFileSync(new URL("./package.json", import.meta.url), "utf-8"));
+const pkg = JSON.parse(
+  readFileSync(new URL("./package.json", import.meta.url), "utf-8"),
+);
 
 /** @type {import('rollup').RollupOptions[]} */
 export default [

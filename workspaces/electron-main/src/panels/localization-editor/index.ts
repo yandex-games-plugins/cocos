@@ -1,4 +1,5 @@
 import { type App, createApp } from "vue";
+
 import PanelApp, { styles } from "./App";
 
 const panelDataMap = new WeakMap<any, App>();

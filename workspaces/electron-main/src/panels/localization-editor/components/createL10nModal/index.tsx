@@ -1,14 +1,21 @@
-import styles from "./index.scss";
-
-import { join } from "path";
-import { LANGUAGE_CODES, capitalizeFirstWord, languageName } from "@yandex-games-sdk/common";
+import {
+  capitalizeFirstWord,
+  LANGUAGE_CODES,
+  languageName,
+} from "@yandex-games-sdk/common";
 import * as fs from "fs-extra";
+import { join } from "path";
 import { computed, defineComponent, ref } from "vue";
+
 import { appState } from "../../state";
+import styles from "./index.scss";
 
 export const createL10nModalStyles = styles;
 
-const translateDataRoot = join(Editor.Project.path, "yandex-games-sdk/translate-data/");
+const translateDataRoot = join(
+  Editor.Project.path,
+  "yandex-games-sdk/translate-data/",
+);
 if (!fs.existsSync(translateDataRoot)) {
   fs.mkdirSync(translateDataRoot, { recursive: true });
 }
@@ -17,7 +24,9 @@ export const createL10nModal = defineComponent({
   setup() {
     const modalRef = ref<HTMLDivElement>();
     const langsSelectRef = ref<HTMLSelectElement>();
-    const codes = computed<string[]>(() => appState.translations.map((v) => v.code));
+    const codes = computed<string[]>(() =>
+      appState.translations.map((v) => v.code),
+    );
 
     function createLocalization() {
       const code = langsSelectRef.value?.value;

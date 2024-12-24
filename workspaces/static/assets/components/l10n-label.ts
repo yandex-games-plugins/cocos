@@ -1,9 +1,11 @@
-import { Label, _decorator } from "cc";
+import { _decorator, Label } from "cc";
 // @ts-ignore
 import { EDITOR } from "cc/env";
+
 import { L10nComponent } from "./l10n-component";
 
-const { ccclass, property, executeInEditMode, requireComponent, menu } = _decorator;
+const { ccclass, property, executeInEditMode, requireComponent, menu } =
+  _decorator;
 
 @ccclass("L10nLabel")
 @executeInEditMode(true)
@@ -47,7 +49,10 @@ export default class L10nLabel extends L10nComponent {
 
   render() {
     const translatedString = this.translateKey(this._key);
-    if (typeof this.label === "undefined" || typeof translatedString === "undefined") {
+    if (
+      typeof this.label === "undefined" ||
+      typeof translatedString === "undefined"
+    ) {
       return;
     }
     if (EDITOR) {

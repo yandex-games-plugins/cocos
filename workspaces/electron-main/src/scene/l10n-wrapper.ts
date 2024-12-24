@@ -6,7 +6,9 @@ class L10NManagerWrapper {
 
   async l10nManager(): Promise<IL10NManager> {
     const l10nManager = (
-      (await Editor.Module.importProjectModule(`db://${plugin.name}/ysdk.ts`)) as any
+      (await Editor.Module.importProjectModule(
+        `db://${plugin.name}/ysdk.ts`,
+      )) as any
     ).l10n as IL10NManager;
     return l10nManager;
   }

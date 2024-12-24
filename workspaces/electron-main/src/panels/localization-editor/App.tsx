@@ -1,12 +1,15 @@
-import appStyles from "./app.scss";
-
-import { basename, join } from "path";
 import { ipc, isLanguageCode } from "@yandex-games-sdk/common";
 import * as chokidar from "chokidar";
 import * as fs from "fs-extra";
+import { basename, join } from "path";
 import { defineComponent, onMounted } from "vue";
 import type { ISO_639_1 } from "ysdk";
-import { createL10nModal, createL10nModalStyles } from "./components/createL10nModal";
+
+import appStyles from "./app.scss";
+import {
+  createL10nModal,
+  createL10nModalStyles,
+} from "./components/createL10nModal";
 import { l10nEditor, l10nEditorStyles } from "./components/l10nEditor";
 import {
   previewLanguageModal,
@@ -36,18 +39,27 @@ export default defineComponent({
     return () => (
       <>
         <header class="header">
-          <ui-button class="header__button" onClick={() => (appState.createL10nModal.show = true)}>
+          <ui-button
+            class="header__button"
+            onClick={() => (appState.createL10nModal.show = true)}
+          >
             <ui-icon value="add-more" />
             <ui-label>New</ui-label>
           </ui-button>
 
           {appState.editor.currentTranslation && (
             <>
-              <ui-button class="header__button" onClick={() => window.postMessage("editor:save")}>
+              <ui-button
+                class="header__button"
+                onClick={() => window.postMessage("editor:save")}
+              >
                 <ui-icon value="save" />
                 <ui-label>Save</ui-label>
               </ui-button>
-              <ui-button class="header__button" onClick={() => window.postMessage("editor:open")}>
+              <ui-button
+                class="header__button"
+                onClick={() => window.postMessage("editor:open")}
+              >
                 <ui-icon value="folder" />
                 <ui-label>Open</ui-label>
               </ui-button>
@@ -55,7 +67,10 @@ export default defineComponent({
           )}
 
           {appState.editor.currentTranslation && (
-            <ui-button class="header__button" onClick={() => window.postMessage("editor:reload")}>
+            <ui-button
+              class="header__button"
+              onClick={() => window.postMessage("editor:reload")}
+            >
               <ui-icon value="refresh" />
               <ui-label>Reload</ui-label>
             </ui-button>
@@ -69,7 +84,9 @@ export default defineComponent({
               onClick={() => (appState.previewLanguageModal.show = true)}
             >
               <ui-icon value="font" />
-              <ui-label>Preview: {appState.previewLanguage.code?.toUpperCase()}</ui-label>
+              <ui-label>
+                Preview: {appState.previewLanguage.code?.toUpperCase()}
+              </ui-label>
             </ui-button>
           )}
         </header>
@@ -127,7 +144,10 @@ export default defineComponent({
   },
 });
 
-const translateDataRoot = join(Editor.Project.path, "yandex-games-sdk/translate-data/");
+const translateDataRoot = join(
+  Editor.Project.path,
+  "yandex-games-sdk/translate-data/",
+);
 if (!fs.existsSync(translateDataRoot)) {
   fs.mkdirSync(translateDataRoot, { recursive: true });
 }
@@ -147,11 +167,15 @@ chokidar.watch(translateDataRoot).on("all", (event, path) => {
       appState.translations.push({ code, path });
       break;
     case "change":
-      window.dispatchEvent(new CustomEvent("localization:filechange", { detail: code }));
+      window.dispatchEvent(
+        new CustomEvent("localization:filechange", { detail: code }),
+      );
       ipc.scene.request("reload");
       break;
     case "unlink":
-      appState.translations = appState.translations.filter((v) => v.code !== code);
+      appState.translations = appState.translations.filter(
+        (v) => v.code !== code,
+      );
       if (appState.editor.currentTranslation?.code === code) {
         appState.editor.currentTranslation = appState.translations[0];
       }

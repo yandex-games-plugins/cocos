@@ -1,11 +1,19 @@
 import fs from "node:fs";
 import path from "node:path";
+
 import archiver from "archiver";
 
-const pkg = JSON.parse(fs.readFileSync(new URL("../package.json", import.meta.url), "utf-8"));
+const pkg = JSON.parse(
+  fs.readFileSync(new URL("../package.json", import.meta.url), "utf-8"),
+);
 
 const config = {
-  folders: ["docs", "i18n", "workspaces/electron-main/dist", "workspaces/static"],
+  folders: [
+    "docs",
+    "i18n",
+    "workspaces/electron-main/dist",
+    "workspaces/static",
+  ],
   modules: [
     "i18next",
     "regenerator-runtime",
@@ -91,7 +99,10 @@ if (!fs.existsSync(path.resolve(outputDir))) {
   }
 
   for (const module of config.modules) {
-    archive.directory(`./node_modules/${module}`, `ysdk/node_modules/${module}`);
+    archive.directory(
+      `./node_modules/${module}`,
+      `ysdk/node_modules/${module}`,
+    );
   }
 
   for (const file of config.files) {
@@ -99,7 +110,6 @@ if (!fs.existsSync(path.resolve(outputDir))) {
   }
 
   archive.finalize();
-  archive;
 }
 
 //#endregion Cocos Store

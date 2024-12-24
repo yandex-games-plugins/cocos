@@ -101,7 +101,9 @@ module.exports = (env) => {
   }
 
   if (process.platform !== "darwin") {
-    config.plugins.push(new webpack.IgnorePlugin({ resourceRegExp: /^fsevents$/ }));
+    config.plugins.push(
+      new webpack.IgnorePlugin({ resourceRegExp: /^fsevents$/ }),
+    );
   }
 
   return config;

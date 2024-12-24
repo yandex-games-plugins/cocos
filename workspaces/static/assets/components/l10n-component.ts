@@ -1,4 +1,4 @@
-import { Component, Enum, _decorator } from "cc";
+import { _decorator, Component, Enum } from "cc";
 const { property } = _decorator;
 import type { TranslateOptions } from "../core/l10n";
 import { l10n } from "../ysdk";

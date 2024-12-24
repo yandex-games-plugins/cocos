@@ -9,11 +9,17 @@
   "editor": ">=3.6.0",
   "license": "MIT",
   "packageManager": "npm@10.2.3",
-  "workspaces": ["workspaces/*"],
+  "workspaces": [
+    "workspaces/*"
+  ],
   "scripts": {
     "bundle": "node scripts/bundle.mjs",
     "build": "turbo build",
-    "build:watch": "turbo build:watch"
+    "build:watch": "turbo build:watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --check",
+    "format:fix": "prettier . --write"
   },
   "panels": {
     "localization-editor": {
@@ -53,16 +59,24 @@
     ],
     "messages": {
       "open-localization-editor": {
-        "methods": ["openLocalizationEditor"]
+        "methods": [
+          "openLocalizationEditor"
+        ]
       },
       "generate-templates": {
-        "methods": ["generateTemplates"]
+        "methods": [
+          "generateTemplates"
+        ]
       },
       "check-templates": {
-        "methods": ["checkTemplates"]
+        "methods": [
+          "checkTemplates"
+        ]
       },
       "get-l10n-bundle": {
-        "methods": ["getL10NBundle"]
+        "methods": [
+          "getL10NBundle"
+        ]
       }
     },
     "asset-db": {
@@ -89,9 +103,16 @@
     "@types/ysdk": "^1.0.7"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.2",
+    "@eslint/js": "^9.17.0",
     "archiver": "^6.0.1",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
     "turbo": "^2.1.2",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "typescript-eslint": "^8.18.2"
   }
 }

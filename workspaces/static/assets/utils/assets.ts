@@ -1,4 +1,4 @@
-import { type ImageAsset, Texture2D, assetManager } from "cc";
+import { assetManager, type ImageAsset, Texture2D } from "cc";
 import type { Player } from "ysdk";
 
 export async function loadPhotoAsTexture(

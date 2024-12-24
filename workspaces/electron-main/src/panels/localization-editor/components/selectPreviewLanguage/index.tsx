@@ -1,9 +1,13 @@
-import styles from "./index.scss";
-
-import { capitalizeFirstWord, ipc, languageName } from "@yandex-games-sdk/common";
+import {
+  capitalizeFirstWord,
+  ipc,
+  languageName,
+} from "@yandex-games-sdk/common";
 import { defineComponent, ref } from "vue";
 import type { ISO_639_1 } from "ysdk";
+
 import { appState } from "../../state";
+import styles from "./index.scss";
 
 export const previewLanguageModalStyles = styles;
 

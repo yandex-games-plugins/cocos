@@ -3,7 +3,9 @@ import type { L10NBundle } from "../l10n";
 import type { Messages } from "../types";
 
 type MethodMap = { [key in keyof Messages]: Messages[key]["methods"][0] };
-type Methods<T extends { [key in MethodMap[keyof MethodMap]]: (...args: any[]) => any }> = T;
+type Methods<
+  T extends { [key in MethodMap[keyof MethodMap]]: (...args: any[]) => any },
+> = T;
 
 export type MainMethods = Methods<{
   openLocalizationEditor(): void;

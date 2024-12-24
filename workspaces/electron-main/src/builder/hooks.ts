@@ -22,7 +22,9 @@ export const onBeforeBuildAssets = async function (
     logger.error("l10n/translations.json query failed");
     return;
   }
-  const translationsInstance = (await cache.getInstance(translationsInfo.uuid)) as JsonAsset;
+  const translationsInstance = (await cache.getInstance(
+    translationsInfo.uuid,
+  )) as JsonAsset;
   translationsInstance.json = await ipc.main.request("get-l10n-bundle");
   cache.addInstance(translationsInstance);
 };

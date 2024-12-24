@@ -2,6 +2,7 @@ import { cclegacy, game } from "cc";
 // @ts-ignore
 import { EDITOR } from "cc/env";
 import type { SDK } from "ysdk";
+
 import { L10NManager } from "./core/l10n";
 
 export let ysdk = {} as SDK;

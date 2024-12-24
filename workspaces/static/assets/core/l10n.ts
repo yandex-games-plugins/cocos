@@ -1,13 +1,18 @@
 import {
-  type L10NBundle,
   capitalizeEachWord,
   capitalizeFirstWord,
   ipc,
+  type L10NBundle,
 } from "@yandex-games-sdk/common";
 // @ts-ignore
 import { EDITOR } from "cc/env";
-import { type InitOptions as I18NextInitOptions, createInstance, type i18n } from "i18next";
+import {
+  createInstance,
+  type i18n,
+  type InitOptions as I18NextInitOptions,
+} from "i18next";
 import type { ISO_639_1 } from "ysdk";
+
 import { fetchL10NBundle } from "./bundle";
 
 export type TranslateOptions = {
